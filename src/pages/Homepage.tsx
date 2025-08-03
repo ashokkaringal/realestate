@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Home1, TrendingUp, Star } from 'lucide-react';
+import { Search, Home, TrendingUp, Star } from 'lucide-react';
 import Container from '../components/Container';
 import Button from '../components/Button';
 import Input from '../components/Input';
