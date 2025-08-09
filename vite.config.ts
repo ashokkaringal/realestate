@@ -9,4 +9,8 @@ export default defineConfig({
       "@": "./src",
     },
   },
+  build: {
+    outDir: 'dist',         // Optional: explicitly set output folder
+    emptyOutDir: true       // Cleans the folder before each build
+  }
 })
