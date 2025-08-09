@@ -1,0 +1,27 @@
+{
+  "name": "realestate-rss-proxy",
+  "version": "1.0.0",
+  "description": "RSS Proxy Server for Real Estate News",
+  "main": "rss-proxy.js",
+  "scripts": {
+    "start": "node rss-proxy.js",
+    "dev": "nodemon rss-proxy.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "axios": "^1.6.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "rss",
+    "proxy",
+    "real-estate",
+    "news"
+  ],
+  "author": "RealEstate Team",
+  "license": "MIT"
+} 

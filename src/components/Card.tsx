@@ -1,4 +1,5 @@
 import React from 'react';
+import { ExternalLink, Calendar, MapPin, Globe } from 'lucide-react';
 
 interface CardProps {
   children: React.ReactNode;
@@ -105,5 +106,84 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   );
 };
 
-export { Card, PropertyCard };
+interface NewsCardProps {
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+  publishedAt: string;
+  source: string;
+  category: 'local' | 'national' | 'international';
+}
+
+const NewsCard: React.FC<NewsCardProps> = ({
+  title,
+  description,
+  image,
+  link,
+  publishedAt,
+  source,
+  category,
+}) => {
+  const categoryConfig = {
+    local: { label: 'Local', icon: <MapPin className="w-3 h-3" />, color: 'bg-blue-100 text-blue-800' },
+    national: { label: 'National', icon: <MapPin className="w-3 h-3" />, color: 'bg-green-100 text-green-800' },
+    international: { label: 'International', icon: <Globe className="w-3 h-3" />, color: 'bg-purple-100 text-purple-800' },
+  };
+
+  const config = categoryConfig[category];
+
+  const handleClick = () => {
+    window.open(link, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <Card onClick={handleClick} className="group h-full flex flex-col">
+      <div className="relative overflow-hidden">
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+        <div className="absolute top-4 left-4">
+          <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 text-xs font-medium rounded-full ${config.color}`}>
+            {config.icon}
+            {config.label}
+          </span>
+        </div>
+        <div className="absolute top-4 right-4">
+          <div className="bg-black bg-opacity-50 text-white p-2 rounded-full group-hover:bg-opacity-70 transition-all">
+            <ExternalLink className="w-4 h-4" />
+          </div>
+        </div>
+      </div>
+      
+      <div className="p-6 flex-1 flex flex-col">
+        <div className="flex items-center text-sm text-gray-500 mb-3">
+          <Calendar className="w-4 h-4 mr-1" />
+          <span>{publishedAt}</span>
+          <span className="mx-2">•</span>
+          <span className="font-medium text-gray-700">{source}</span>
+        </div>
+        
+        <h3 className="text-lg font-semibold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors line-clamp-2">
+          {title}
+        </h3>
+        
+        <p className="text-gray-600 text-sm mb-4 flex-1 line-clamp-3">
+          {description}
+        </p>
+        
+        <div className="mt-auto">
+          <div className="flex items-center text-primary-600 font-medium text-sm group-hover:text-primary-700 transition-colors">
+            <span>Read Full Article</span>
+            <ExternalLink className="w-4 h-4 ml-1" />
+          </div>
+        </div>
+      </div>
+    </Card>
+  );
+};
+
+export { Card, PropertyCard, NewsCard };
 export default Card; 

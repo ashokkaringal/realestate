@@ -1,76 +1,68 @@
-# RealEstate - Modern Indian Real Estate Website
+# RealEstate Website
 
-A modern, responsive real estate website built for the Indian market using React, TypeScript, Vite, and Tailwind CSS.
+A modern real estate website built with React, TypeScript, and Tailwind CSS. Features property listings, search functionality, and real estate news integration.
 
-## 🚀 Features
+## Features
 
-- **Modern Design**: Clean, premium UI with smooth animations and hover effects
-- **Mobile-First**: Fully responsive design that works on all devices
-- **Indian Market Focus**: Pricing in ₹ Lakhs/Crores format, Indian locations
-- **Component Library**: Reusable UI components with TypeScript support
-- **Fast Performance**: Built with Vite for optimal development and build times
-- **Custom Design System**: Tailwind CSS with custom color palette and spacing
+- **Property Listings**: Browse and search for properties with detailed information
+- **Real Estate News**: Stay updated with the latest real estate news from local, national, and international sources
+- **Responsive Design**: Modern, mobile-friendly interface
+- **Search & Filter**: Advanced search and filtering capabilities
+- **RSS Integration**: Real-time news from multiple RSS feeds
 
-## 🛠️ Tech Stack
+## News Features
 
-- **Frontend**: React 18 + TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **Font**: Inter (Google Fonts)
+The website includes a comprehensive news section that:
 
-## 📁 Project Structure
+- Displays real estate news from multiple sources
+- Categorizes news by Local, National, and International
+- Provides search functionality
+- Shows news with cover images and descriptions
+- Links directly to original articles
+- Supports pagination for better performance
 
-```
-src/
-├── components/          # Reusable UI components
-│   ├── Button.tsx      # Button component with variants
-│   ├── Card.tsx        # Card and PropertyCard components
-│   ├── Input.tsx       # Form input component
-│   ├── Badge.tsx       # Badge component for tags
-│   ├── Container.tsx   # Layout container component
-│   ├── Header.tsx      # Navigation header
-│   ├── Footer.tsx      # Site footer
-│   ├── Layout.tsx      # Main layout wrapper
-│   └── index.ts        # Component exports
-├── pages/              # Page components
-│   └── Homepage.tsx    # Homepage with hero, properties, stats
-├── utils/              # Utility functions and data
-│   └── sampleData.ts   # Sample property data
-├── assets/             # Static assets
-└── index.css           # Global styles and Tailwind imports
-```
+## Tech Stack
 
-## 🎨 Design System
+### Frontend
+- React 19
+- TypeScript
+- Tailwind CSS
+- React Router DOM
+- Lucide React (Icons)
 
-### Colors
-- **Primary**: Modern blue/teal palette (#0ea5e9 to #0c4a6e)
-- **Secondary**: Orange accents for CTAs (#f97316 to #7c2d12)
-- **Gray**: Neutral grays for text and backgrounds
+### Backend (Optional)
+- Node.js
+- Express.js
+- RSS Parser
+- CORS support
 
-### Typography
-- **Font Family**: Inter (Google Fonts)
-- **Scale**: Responsive text sizes from xs to 6xl
-
-### Components
-- **Button**: Primary, secondary, and outline variants
-- **Card**: Property cards with hover animations
-- **Input**: Form inputs with focus states
-- **Badge**: Property tags (Featured, New, etc.)
-- **Container**: Max-width wrapper for content
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+- Node.js (v16 or higher)
 - npm or yarn
 
-### Installation
+### Frontend Setup
 
-1. Clone the repository:
+1. Install dependencies:
 ```bash
-git clone <repository-url>
-cd realestate
+npm install
+```
+
+2. Start the development server:
+```bash
+npm run dev
+```
+
+3. Open your browser and navigate to `http://localhost:5173`
+
+### Backend Setup (Optional)
+
+The backend provides RSS feed integration for real-time news. If you want to use real RSS feeds instead of sample data:
+
+1. Navigate to the server directory:
+```bash
+cd server
 ```
 
 2. Install dependencies:
@@ -78,78 +70,126 @@ cd realestate
 npm install
 ```
 
-3. Start the development server:
+3. Start the RSS proxy server:
 ```bash
-npm run dev
+npm start
 ```
 
-4. Open your browser and visit `http://localhost:5173`
+The backend will run on `http://localhost:3001`
 
-### Build for Production
+### Environment Variables
+
+Create a `.env` file in the root directory to configure the API URL:
+
+```env
+REACT_APP_API_URL=http://localhost:3001
+```
+
+## Project Structure
+
+```
+realestate/
+├── src/
+│   ├── components/          # Reusable UI components
+│   ├── pages/              # Page components
+│   │   ├── Homepage.tsx    # Main homepage
+│   │   └── News.tsx        # News page
+│   ├── utils/              # Utility functions
+│   │   ├── sampleData.ts   # Sample property data
+│   │   └── newsService.ts  # News API service
+│   └── App.tsx             # Main app component
+├── server/                 # Backend RSS proxy
+│   ├── rss-proxy.js        # Express server
+│   └── package.json        # Backend dependencies
+└── package.json            # Frontend dependencies
+```
+
+## News Sources
+
+The news section aggregates content from various real estate RSS feeds:
+
+### Local News
+- MoneyControl Real Estate
+- 99acres News
+- PropMart News
+
+### National News
+- LiveMint Real Estate
+- Business Standard Real Estate
+- Financial Express
+
+### International News
+- Reuters Real Estate
+- Bloomberg Real Estate
+- Financial Times Real Estate
+
+## API Endpoints
+
+When the backend is running, the following endpoints are available:
+
+- `GET /api/news` - Get all news articles
+- `GET /api/news/:category` - Get news by category (local, national, international)
+- `GET /api/news/search/:query` - Search news articles
+- `GET /api/health` - Health check endpoint
+
+## Customization
+
+### Adding New RSS Feeds
+
+To add new RSS feeds, edit the `RSS_FEEDS` object in `server/rss-proxy.js`:
+
+```javascript
+const RSS_FEEDS = {
+  local: [
+    // Add your local RSS feeds here
+  ],
+  national: [
+    // Add your national RSS feeds here
+  ],
+  international: [
+    // Add your international RSS feeds here
+  ]
+};
+```
+
+### Styling
+
+The project uses Tailwind CSS for styling. You can customize the design by modifying:
+
+- `src/index.css` - Global styles and custom utilities
+- `tailwind.config.js` - Tailwind configuration
+- Component-specific styles in individual component files
+
+## Deployment
+
+### Frontend Deployment
+
+Build the project for production:
 
 ```bash
 npm run build
 ```
 
-### Preview Production Build
+The built files will be in the `dist/` directory.
 
-```bash
-npm run preview
-```
+### Backend Deployment
 
-## 📱 Responsive Design
+The backend can be deployed to any Node.js hosting platform (Heroku, Vercel, Railway, etc.).
 
-The website is built with a mobile-first approach and includes:
-- Responsive navigation with mobile menu
-- Adaptive property grid (1 column on mobile, 3 on desktop)
-- Flexible hero section with stacked search bar on mobile
-- Optimized typography and spacing for all screen sizes
+Set the `PORT` environment variable for production deployment.
 
-## 🏠 Sample Data
-
-The website includes 6 sample properties featuring:
-- **Locations**: Mumbai, Bangalore, Delhi NCR, Pune
-- **Property Types**: 2BHK, 3BHK apartments and villas
-- **Pricing**: Realistic Indian pricing in ₹ Lakhs/Crores format
-- **Amenities**: Common Indian property amenities
-- **Badges**: Featured, New, Premium, Luxury, Smart Home tags
-
-## 🎯 Key Features Implemented
-
-- ✅ Vite + React + TypeScript setup
-- ✅ Tailwind CSS with custom design system
-- ✅ Lucide React icons integration
-- ✅ Responsive header with mobile menu
-- ✅ Hero section with search functionality
-- ✅ Featured properties grid (3x2 layout)
-- ✅ Stats section with animated counters
-- ✅ Footer with contact information
-- ✅ Mobile-first responsive design
-- ✅ Smooth hover animations
-- ✅ Indian market-specific content
-
-## 🔮 Future Enhancements
-
-- Property detail pages
-- Advanced search and filtering
-- Image carousels and galleries
-- Contact forms and lead generation
-- Property comparison tools
-- User authentication and favorites
-- Admin dashboard for property management
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
 3. Make your changes
-4. Add tests if applicable
+4. Test thoroughly
 5. Submit a pull request
 
----
+## License
 
-Built with ❤️ for the Indian real estate market
+This project is licensed under the MIT License.
+
+## Support
+
+For support or questions, please open an issue in the repository.
